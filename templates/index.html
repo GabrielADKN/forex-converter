@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/app.css">
+    <title>Forex exchange</title>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Forex exchange</h1>
+        {% block content %}
+            <h4>List of avalaible currencies</h4>
+            <ul class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for cat,message in messages %}
+                        <!-- {% set category = message.split(' ', 1)[0].lower() %} -->
+                        <li class="flash-message flash-{{ cat }}">{{ message }}</li>
+                    {% endfor %}
+                {% endwith %}
+            </ul>
+        
+            <select name='currencies'>
+                {% for currency_code, currency_data in currencies.items() %}
+                    <option value='{{ currency_code }}' title='{{ currency_data }}'>{{ currency_code }} : {{ currency_data }}</option>
+                {% endfor %}
+            </select>
+            
+            <h3> Fill out the form</h3>
+            <p> You must enter only the code of the currency like USD, EUR, XOF. <br> 
+                You can use then selection on the top to check all avalaible currencies.</p>
+            <form action='/convert' method='POST'>
+                <label for='from'><b>Converting from : </b></label>
+                <input type='text' name='from' id='from' placeholder='from'>
+                <label for='to'><b>Converting to : </b></label>
+                <input type='text' name='to' id='to' placeholder='to'>
+                <label for='amount'><b>Amount : </b></label>
+                <input type='number' name='amount' id='amount' placeholder='amount'>
+                <input type='submit' value='Convert'>
+            </form>
+        {% endblock %}
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>

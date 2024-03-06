@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block title %}Converting{% endblock %}
+
+{% block content %}
+    <h3>
+        From : <span class="text-from">{{response.from}}</span> <br>
+        To : <span class="text-to">{{response.to}}</span> <br>
+        Amount : <span class="text-amount">{{response.symbole_from}}{{response.amount}}</span> <br>
+        Result : <span class="text-result">{{response.symbole_to}}{{response.price}}</span> 
+    </h3>
+
+    <a href="http://127.0.0.1:5000/" class="btn btn-primary">Home</a>
+{% endblock %}
